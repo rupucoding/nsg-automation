@@ -1,0 +1,7 @@
+# Runtime dependencies (mirrors pyproject.toml). Prefer: pip install -e ".[dev]"
+azure-identity>=1.17
+azure-mgmt-network>=33.0.0
+azure-mgmt-resource>=24.0.0
+click>=8.1
+rich>=13.7
+python-dotenv>=1.0

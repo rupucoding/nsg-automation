@@ -1,0 +1,61 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "nsg-tool: whoami (test auth)",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "nsg_automation",
+      "args": ["whoami"],
+      "envFile": "${workspaceFolder}/.env",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "nsg-tool: validate example config",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "nsg_automation",
+      "args": ["validate", "config/example-nsg.json"],
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "nsg-tool: plan example config",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "nsg_automation",
+      "args": ["plan", "config/example-nsg.json"],
+      "envFile": "${workspaceFolder}/.env",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "nsg-tool: list (prompts for RG/NSG)",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "nsg_automation",
+      "args": ["list", "-g", "${input:resourceGroup}", "--nsg", "${input:nsgName}"],
+      "envFile": "${workspaceFolder}/.env",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "nsg-tool: interactive mode",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "nsg_automation",
+      "args": ["interactive"],
+      "envFile": "${workspaceFolder}/.env",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "pytest: all tests",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": ["-v"],
+      "console": "integratedTerminal"
+    }
+  ],
+  "inputs": [
+    { "id": "resourceGroup", "type": "promptString", "description": "Resource group", "default": "network-rg" },
+    { "id": "nsgName", "type": "promptString", "description": "NSG name", "default": "web-nsg" }
+  ]
+}

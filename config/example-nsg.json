@@ -1,0 +1,80 @@
+{
+  "resourceGroup": "network-rg",
+  "nsg": "web-nsg",
+  "location": "eastus",
+  "tags": { "environment": "dev", "owner": "network-team" },
+  "rules": [
+    {
+      "name": "Allow-HTTPS",
+      "direction": "Inbound",
+      "access": "Allow",
+      "protocol": "Tcp",
+      "source": "*",
+      "sourcePort": "*",
+      "destination": "*",
+      "destinationPort": "443",
+      "priority": 100,
+      "description": "Allow HTTPS"
+    },
+    {
+      "name": "Allow-HTTP-Redirect",
+      "direction": "Inbound",
+      "access": "Allow",
+      "protocol": "Tcp",
+      "source": "Internet",
+      "sourcePort": "*",
+      "destination": "10.10.1.0/24",
+      "destinationPort": "80",
+      "priority": 110,
+      "description": "HTTP for redirect to HTTPS"
+    },
+    {
+      "name": "Allow-SSH-Admin",
+      "direction": "Inbound",
+      "access": "Allow",
+      "protocol": "Tcp",
+      "source": ["203.0.113.0/28", "198.51.100.10"],
+      "sourcePort": "*",
+      "destination": "10.10.1.0/24",
+      "destinationPort": "22",
+      "priority": 200,
+      "description": "SSH from admin office ranges only"
+    },
+    {
+      "name": "Allow-LB-Probes",
+      "direction": "Inbound",
+      "access": "Allow",
+      "protocol": "*",
+      "source": "AzureLoadBalancer",
+      "sourcePort": "*",
+      "destination": "*",
+      "destinationPort": "*",
+      "priority": 4000,
+      "description": "Keep load balancer health probes working"
+    },
+    {
+      "name": "Deny-All-Inbound",
+      "direction": "Inbound",
+      "access": "Deny",
+      "protocol": "*",
+      "source": "*",
+      "sourcePort": "*",
+      "destination": "*",
+      "destinationPort": "*",
+      "priority": 4096,
+      "description": "Explicit deny for everything else"
+    },
+    {
+      "name": "Allow-SQL-Outbound",
+      "direction": "Outbound",
+      "access": "Allow",
+      "protocol": "Tcp",
+      "source": "10.10.1.0/24",
+      "sourcePort": "*",
+      "destination": "Sql.EastUS",
+      "destinationPort": "1433",
+      "priority": 100,
+      "description": "App tier to Azure SQL in East US"
+    }
+  ]
+}

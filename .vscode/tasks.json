@@ -1,0 +1,9 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    { "label": "Install (dev)", "type": "shell", "command": "${workspaceFolder}/.venv/Scripts/python -m pip install -e \".[dev]\"" },
+    { "label": "Run tests", "type": "shell", "command": "${workspaceFolder}/.venv/Scripts/python -m pytest -v", "group": { "kind": "test", "isDefault": true } },
+    { "label": "Tests with coverage", "type": "shell", "command": "${workspaceFolder}/.venv/Scripts/python -m pytest --cov=nsg_automation --cov-report=term-missing" },
+    { "label": "Validate example config", "type": "shell", "command": "${workspaceFolder}/.venv/Scripts/nsg-tool validate config/example-nsg.json" }
+  ]
+}

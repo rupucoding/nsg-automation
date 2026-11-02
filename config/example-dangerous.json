@@ -1,0 +1,38 @@
+{
+  "resourceGroup": "network-rg",
+  "nsg": "web-nsg",
+  "rules": [
+    {
+      "name": "Allow-Everything",
+      "direction": "Inbound",
+      "access": "Allow",
+      "protocol": "*",
+      "source": "0.0.0.0/0",
+      "sourcePort": "*",
+      "destination": "*",
+      "destinationPort": "*",
+      "priority": 100,
+      "description": "DANGEROUS example - used to demonstrate warnings"
+    },
+    {
+      "name": "Allow-RDP-Internet",
+      "direction": "Inbound",
+      "access": "Allow",
+      "protocol": "Tcp",
+      "source": "Internet",
+      "destination": "*",
+      "destinationPort": "3389",
+      "priority": 100
+    },
+    {
+      "name": "Deny-RDP",
+      "direction": "Inbound",
+      "access": "Deny",
+      "protocol": "Tcp",
+      "source": "*",
+      "destination": "10.0.0.0/24",
+      "destinationPort": "3389",
+      "priority": 300
+    }
+  ]
+}
